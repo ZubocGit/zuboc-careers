@@ -382,6 +382,14 @@ class ApplicationModal {
             
             if (response.ok) {
                 this.showToast('Application submitted successfully!', 'success');
+                this.form.reset();
+                // Clear file preview and show upload area again
+                const filePreview = document.getElementById('file-preview');
+                const uploadArea = document.getElementById('file-upload-area');
+                if (filePreview && uploadArea) {
+                    filePreview.style.display = 'none';
+                    uploadArea.style.display = '';
+                }
                 this.closeModal();
             } else {
                 const respText = await response.text().catch(() => '');
