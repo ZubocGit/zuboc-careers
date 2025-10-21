@@ -252,7 +252,7 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-item">
+        <!-- <div class="testimonial-item">
           <div class="testimonial-content">
             <p class="testimonial-text">
               Working at Zuboc feels like being part of something meaningful. Every idea is valued, and I’ve learned to
@@ -289,16 +289,16 @@
             </div>
           </div>
         </div>
+      </div> -->
+        <div class="carousel-controls">
+          <button class="carousel-btn prev-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn next-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn prev-btn">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="carousel-btn next-btn">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
   </section>
 
   <!-- Application Process Section -->
@@ -438,6 +438,14 @@
         </div>
 
         <div class="grid">
+          <div class="field" id="apply-link-field-group">
+            <label for="apply-link">Portfolio / LinkedIn</label>
+            <div class="multi-link-inputs">
+              <input style="width: -webkit-fill-available;" id="apply-link" name="link[]" type="url"
+                placeholder="https://..." />
+            </div>
+            <button type="button" class="add-link-btn" id="add-link-btn">Add another link</button>
+          </div>
           <div class="field">
             <label for="apply-phone">Contact Number *</label>
             <div class="phone-input-container">
@@ -447,14 +455,7 @@
             </div>
             <small class="error" data-error-for="apply-phone"></small>
           </div>
-          <div class="field" id="apply-link-field-group">
-            <label for="apply-link">Portfolio / LinkedIn</label>
-            <div class="multi-link-inputs">
-              <input style="width: -webkit-fill-available;" id="apply-link" name="link[]" type="url"
-                placeholder="https://..." />
-            </div>
-            <button type="button" class="add-link-btn" id="add-link-btn">Add another link</button>
-          </div>
+
         </div>
 
         <div class="field">
