@@ -617,7 +617,7 @@ scrollToTopBtn.style.cssText = `
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--rose-gold), var(--dusty-rose));
+    background: #55434b;
     border: none;
     border-radius: 50%;
     color: white;
@@ -627,7 +627,7 @@ scrollToTopBtn.style.cssText = `
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 1000;
-    box-shadow: 0 5px 20px rgba(212, 165, 116, 0.3);
+    box-shadow: 0 5px 20px rgba(85, 67, 75, 0.3);
 `;
 
 document.body.appendChild(scrollToTopBtn);
