@@ -240,7 +240,7 @@ class ApplicationModal {
         if (!role) return;
         
         this.roleIdInput.value = role.id;
-        this.titleElement.textContent = `Apply: ${role.title}`;
+        this.titleElement.textContent = `Apply for ${role.title}`;
         if (this.roleSelect) {
             this.roleSelect.value = role.id;
         }
