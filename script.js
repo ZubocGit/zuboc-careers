@@ -375,7 +375,7 @@ class ApplicationModal {
             }
 
             // Submit to webhook
-            const response = await fetch('https://n8n.srv1052463.hstgr.cloud/webhook-test/candidate-application', {
+            const response = await fetch('https://n8n.srv1052463.hstgr.cloud/webhook/candidate-application', {
                 method: 'POST',
                 body: formData
             });
