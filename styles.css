@@ -90,7 +90,7 @@ body {
   right: -23px;
   font-size: 0.6rem;
   font-weight: 600;
-  color:#B0698D;
+  color: #b0698d;
   background: white;
   padding: 1px 4px;
   border-radius: 2px;
@@ -159,12 +159,11 @@ body {
   .hero {
     min-height: 50vh;
   }
-    
 }
 @media screen and (max-width: 1536px) {
   .hero {
     min-height: 100svh;
-    padding-top: 2rem;  
+    padding-top: 2rem;
     padding-bottom: 2rem;
   }
 }
@@ -245,7 +244,7 @@ body {
 
 .cta-button {
   display: inline-block;
-  background:#55434b;
+  background: #55434b;
   color: white;
   padding: 15px 40px;
   text-decoration: none;
@@ -367,7 +366,7 @@ body {
   background: white;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform ease;
 }
 
 .value-item:hover {
@@ -868,7 +867,7 @@ body {
 .social-link {
   width: 45px;
   height: 45px;
-  background: #DED7C6;
+  background: #ded7c6;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -906,7 +905,7 @@ body {
 
 .newsletter-form button {
   padding: 12px 25px;
-  background: #DED7C6;
+  background: #ded7c6;
   border: none;
   border-radius: 25px;
   color: white;
@@ -1000,8 +999,8 @@ body {
 
   .nav-menu {
     position: fixed;
-    left: -100%;
-    top: 70px;
+    left: 100%;
+    top: 65px;
     flex-direction: column;
     background-color: var(--ivory);
     width: 100%;
