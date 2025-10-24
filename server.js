@@ -52,6 +52,66 @@ app.post('/candidate-application', upload.single('cv'), (req, res) => {
   return res.status(200).json({ ok: true, message: 'Application received', file: req.file?.filename });
 });
 
+// Newsletter subscription endpoint
+app.post('/newsletter-subscription', (req, res) => {
+  const { email, timestamp, source } = req.body;
+  
+  console.log('Received newsletter subscription:', {
+    email,
+    timestamp,
+    source
+  });
+  
+  // Forward to external webhook
+  const https = require('https');
+  const postData = JSON.stringify({
+    email,
+    timestamp,
+    source
+  });
+  
+  const options = {
+    hostname: 'n8n.srv1052463.hstgr.cloud',
+    port: 443,
+    path: '/webhook-test/email_collecting',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData)
+    }
+  };
+  
+  const webhookReq = https.request(options, (webhookRes) => {
+    console.log(`Newsletter webhook response status: ${webhookRes.statusCode}`);
+    
+    let data = '';
+    webhookRes.on('data', (chunk) => {
+      data += chunk;
+    });
+    
+    webhookRes.on('end', () => {
+      console.log('Newsletter webhook response:', data);
+      res.status(200).json({ 
+        ok: true, 
+        message: 'Newsletter subscription received',
+        webhookResponse: data 
+      });
+    });
+  });
+  
+  webhookReq.on('error', (error) => {
+    console.error('Newsletter webhook error:', error);
+    res.status(500).json({ 
+      ok: false, 
+      message: 'Failed to forward newsletter subscription',
+      error: error.message 
+    });
+  });
+  
+  webhookReq.write(postData);
+  webhookReq.end();
+});
+
 app.get('/', (_req, res) => {
   res.send('Zuboc local test server is running');
 });

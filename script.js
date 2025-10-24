@@ -131,20 +131,45 @@ if (newsletterForm) {
         button.disabled = true;
         
         try {
-            // Send email to webhook
-            const response = await fetch('https://n8n.srv1052463.hstgr.cloud/webhook-test/email_collecting', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    timestamp: new Date().toISOString(),
-                    source: 'zuboc-career-newsletter'
-                })
-            });
+            console.log('Sending newsletter subscription for email:', email);
+            
+            // Try direct webhook first, fallback to local server
+            let response;
+            try {
+                response = await fetch('https://n8n.srv1052463.hstgr.cloud/webhook-test/email_collecting', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        timestamp: new Date().toISOString(),
+                        source: 'zuboc-career-newsletter'
+                    })
+                });
+            } catch (directError) {
+                console.log('Direct webhook failed, trying local server:', directError);
+                // Fallback to local server
+                response = await fetch('/newsletter-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        timestamp: new Date().toISOString(),
+                        source: 'zuboc-career-newsletter'
+                    })
+                });
+            }
+            
+            console.log('Newsletter webhook response status:', response.status);
+            console.log('Newsletter webhook response:', response);
             
             if (response.ok) {
+                const responseData = await response.json().catch(() => null);
+                console.log('Newsletter subscription successful:', responseData);
+                
                 // Show success message
                 button.textContent = 'Subscribed!';
                 button.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
@@ -156,11 +181,13 @@ if (newsletterForm) {
                     newsletterForm.reset();
                 }, 3000);
             } else {
-                throw new Error(`Subscription failed: ${response.status} ${response.statusText}`);
+                const errorText = await response.text().catch(() => 'Unknown error');
+                console.error('Newsletter webhook error response:', errorText);
+                throw new Error(`Subscription failed: ${response.status} ${response.statusText} - ${errorText}`);
             }
         } catch (error) {
             console.error('Newsletter subscription error:', error);
-            alert('There was an error subscribing to our newsletter. Please try again.');
+            alert(`There was an error subscribing to our newsletter: ${error.message}. Please try again.`);
             button.textContent = originalText;
             button.disabled = false;
         }
