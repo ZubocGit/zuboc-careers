@@ -1570,6 +1570,7 @@ html {
 }
 
 #apply-phone {
+  width: 1rem;
   flex: 1;
   border: none;
   outline: none;
@@ -1646,7 +1647,7 @@ html {
 
 @media (max-width: 600px) {
   .modal {
-     border-radius: 20px;
+    border-radius: 20px;
     padding: 0;
     left: 20px;
     top: 1rem;
