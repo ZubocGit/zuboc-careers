@@ -113,25 +113,56 @@ document.addEventListener('DOMContentLoaded', () => {
 // Newsletter form submission
 const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
+    newsletterForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = newsletterForm.querySelector('input[type="email"]').value;
+        const email = newsletterForm.querySelector('input[type="email"]').value.trim();
+        const button = newsletterForm.querySelector('button');
+        const originalText = button.textContent;
         
-        // Simple email validation
-        if (email && email.includes('@')) {
-            // Show success message
-            const button = newsletterForm.querySelector('button');
-            const originalText = button.textContent;
-            button.textContent = 'Subscribed!';
-            button.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-            
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.style.background = 'linear-gradient(135deg, var(--rose-gold), var(--dusty-rose))';
-                newsletterForm.reset();
-            }, 3000);
-        } else {
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
             alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Show loading state
+        button.textContent = 'Subscribing...';
+        button.disabled = true;
+        
+        try {
+            // Send email to webhook
+            const response = await fetch('https://n8n.srv1052463.hstgr.cloud/webhook-test/email_collecting', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    source: 'zuboc-career-newsletter'
+                })
+            });
+            
+            if (response.ok) {
+                // Show success message
+                button.textContent = 'Subscribed!';
+                button.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(135deg, var(--rose-gold), var(--dusty-rose))';
+                    button.disabled = false;
+                    newsletterForm.reset();
+                }, 3000);
+            } else {
+                throw new Error(`Subscription failed: ${response.status} ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Newsletter subscription error:', error);
+            alert('There was an error subscribing to our newsletter. Please try again.');
+            button.textContent = originalText;
+            button.disabled = false;
         }
     });
 }
