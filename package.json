@@ -1,11 +1,14 @@
 {
-  "name": "zuboc-career-page-local-server",
+  "name": "zuboc-careers",
   "version": "1.0.0",
   "private": true,
-  "description": "Local test server for Zuboc career page form submissions",
-  "main": "server.js",
+  "description": "Zuboc Careers – serverless API for form submissions (Vercel)",
+  "type": "commonjs",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "start": "node server.js"
+    "start": "vercel dev"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -13,4 +16,3 @@
     "multer": "^1.4.5-lts.1"
   }
 }
-
