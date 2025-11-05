@@ -206,10 +206,17 @@ window.addEventListener('scroll', () => {
 
 // Job positions data
 const jobPositions = {
+    'reel-script-writer': {
+        id: 'reel-script-writer',
+        title: 'Reel Script Writer',
+        department: 'Creative',
+        type: 'Full-time',
+        location: 'Malappuram, Kerala (On-site)'
+    },
     'creative-specialist': {
         id: 'creative-specialist',
         title: 'Creative Specialist',
-        department: 'Design',
+        department: 'Creative',
         type: 'Full-time',
         location: 'Malappuram, Kerala (On-site)'
     },
