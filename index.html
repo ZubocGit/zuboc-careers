@@ -25,6 +25,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -40,6 +43,7 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#positions">Positions</a></li>
           <li><a href="#story">Our Story</a></li>
+          <li><a href="#team">Our Team</a></li>
           <li><a href="#why-work">Why Work Here</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -89,23 +93,22 @@
             </div>
             <h3>Reel Script Writer</h3>
             <p class="position-description">
-              We’re looking for a Reel Content Script Writer who can turn everyday
-              moments into scroll-stopping stories. If you love creating
-              engaging short videos that capture emotion, creativity, and brand
-              personality — this role is for you.
+              We’re looking for a Reel Content Script Writer who can turn
+              everyday moments into scroll-stopping stories. If you love
+              creating engaging short videos that capture emotion, creativity,
+              and brand personality — this role is for you.
             </p>
             <ul class="position-requirements">
-               <li><strong>Flexible work mode:</strong> Remote or Onsite</li>
+              <li><strong>Flexible work mode:</strong> Remote or Onsite</li>
               <li>Compelling product storytelling scripts</li>
               <li>Behind-the-scenes content narratives</li>
               <li>Customer transformation stories</li>
               <li>Unboxing experience scripts</li>
               <li>Event showcase content</li>
-             
             </ul>
             <button
               class="apply-button"
-              style="margin-top: 4.8rem"
+              style="margin-top: 2.9rem"
               data-apply="reel-script-writer"
             >
               Apply Now
@@ -131,7 +134,7 @@
             </ul>
             <button
               class="apply-button"
-              style="margin-top: 11.5rem"
+              style="margin-top: 6.6rem"
               data-apply="creative-specialist"
             >
               Apply Now
@@ -161,7 +164,12 @@
               </li>
               <li>Strong communication and leadership skills</li>
             </ul>
-            <button class="apply-button" data-apply="creative-head">
+            <button
+              class="apply-button"
+              data-apply="creative-head"
+              style="margin-top: 0.1rem"
+              1.2rem;
+            >
               Apply Now
             </button>
           </div>
@@ -222,6 +230,11 @@
                 </ul> -->
         </div>
       </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section id="team" class="team-section">
+      <div id="team-grid-root"></div>
     </section>
 
     <!-- Why Work at Zuboc Section -->
@@ -669,5 +682,264 @@
     ></div>
 
     <script src="script.js"></script>
+
+    <!-- Note: For production use, set up a build tool (Vite, Create React App, etc.) -->
+    <!-- This is a development setup using CDN - for production, use a proper build process -->
+
+    <!-- React and dependencies for TeamGridSection -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- TeamGridSection Component - Load and mount -->
+    <script type="text/babel" data-presets="react">
+      const { useState, useRef, useEffect } = React;
+
+      // Team data array
+      const teamData = [
+        {
+          name: "Ayisha",
+          role: "CEO",
+          img: "./assets/Team/AYISHA (1).webp",
+        },
+        {
+          name: "RASHI",
+          role: "Web Developer",
+          img: "./assets/Team/IMG_5861.webp",
+        },
+        {
+          name: "Hida",
+          role: "Admin",
+          img: "./assets/Team/Hidha.webp",
+        },
+        {
+          name: "Anees",
+          role: "Accountant",
+          img: "./assets/Team/Anees-1.webp",
+        },
+        {
+          name: "Hiba",
+          role: "Creative Head",
+          img: "./assets/Team/Hiba.webp",
+        },
+        {
+          name: "Nihal",
+          role: "Senior Operations Executive",
+          img: "./assets/Team/Nihal -1.webp",
+        },
+        {
+          name: "Nikhil",
+          role: "AI Engineer",
+          img: "./assets/Team/Nikhil';.webp",
+        },
+        {
+          name: "Adhi",
+          role: " CRE",
+          img: "./assets/Team/Adhi-2.webp",
+        },
+        {
+          name: "Rifa",
+          role: "Operation Executive",
+          img: "./assets/Team/Rifa.webp",
+        },
+        {
+          name: "Akhila",
+          role: "Stock Manager",
+          img: "./assets/Team/Akhila.webp",
+        },
+      ];
+
+      // ProfileCard subcomponent with hover zoom + cursor-follow parallax
+      const ProfileCard = ({ member }) => {
+        const cardRef = useRef(null);
+        const [isHovered, setIsHovered] = useState(false);
+        const [reducedMotion, setReducedMotion] = useState(false);
+        const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
+
+        // Check for prefers-reduced-motion
+        useEffect(() => {
+          const mediaQuery = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          );
+          setReducedMotion(mediaQuery.matches);
+
+          const handleChange = (e) => setReducedMotion(e.matches);
+          mediaQuery.addEventListener("change", handleChange);
+
+          return () => mediaQuery.removeEventListener("change", handleChange);
+        }, []);
+
+        // Handle mouse move for parallax
+        const handleMouseMove = (e) => {
+          if (!cardRef.current || reducedMotion) return;
+
+          const rect = cardRef.current.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          // Normalize pointer position (-1 to 1)
+          const normalizedX = (e.clientX - centerX) / (rect.width / 2);
+          const normalizedY = (e.clientY - centerY) / (rect.height / 2);
+
+          // Apply parallax translation (±12px) with smooth easing
+          const translateX = normalizedX * 12;
+          const translateY = normalizedY * 12;
+
+          setTransform((prev) => ({
+            ...prev,
+            x: translateX,
+            y: translateY,
+          }));
+        };
+
+        // Reset parallax on mouse leave
+        const handleMouseLeave = () => {
+          setIsHovered(false);
+          setTransform({ x: 0, y: 0, scale: 1 });
+        };
+
+        // Handle mouse enter
+        const handleMouseEnter = () => {
+          setIsHovered(true);
+          setTransform((prev) => ({ ...prev, scale: 1.08 }));
+        };
+
+        return React.createElement(
+          "div",
+          {
+            ref: cardRef,
+            className:
+              "relative isolate rounded-2xl bg-white shadow-sm ring-1 ring-neutral-200 overflow-hidden h-full flex flex-col focus-within:ring-2 focus-within:ring-neutral-400 focus-within:outline-none",
+            onMouseMove: handleMouseMove,
+            onMouseEnter: handleMouseEnter,
+            onMouseLeave: handleMouseLeave,
+            tabIndex: 0,
+            role: "article",
+            "aria-label": `Team member: ${member.name}, ${member.role}`,
+          },
+          React.createElement(
+            "div",
+            {
+              className:
+                "relative w-full pt-[72%] overflow-hidden bg-neutral-100",
+            },
+            React.createElement("img", {
+              src: member.img,
+              alt: `${member.name}, ${member.role} at Zuboc`,
+              className: "absolute inset-0 w-full h-full object-cover",
+              loading: "lazy",
+              style: {
+                transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
+                transition: reducedMotion
+                  ? "transform 0.3s ease-out"
+                  : "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                willChange: reducedMotion ? "auto" : "transform",
+              },
+              draggable: false,
+              onDragStart: (e) => e.preventDefault(),
+              onSelectStart: (e) => e.preventDefault(),
+            }),
+            React.createElement("div", {
+              className:
+                "absolute inset-0 bg-neutral-900 transition-opacity duration-300",
+              style: { opacity: isHovered ? 0.1 : 0.2 },
+              "aria-hidden": "true",
+            })
+          ),
+          React.createElement(
+            "div",
+            {
+              className:
+                "bg-neutral-100 px-5 sm:px-6 pt-4 pb-6 flex-1 flex flex-col",
+            },
+            React.createElement(
+              "h3",
+              {
+                className:
+                  "text-lg md:text-xl font-semibold tracking-[0.12em] uppercase text-neutral-900",
+              },
+              member.name
+            ),
+            React.createElement(
+              "p",
+              {
+                className: "mt-1 text-sm text-neutral-600",
+              },
+              member.role
+            ),
+            React.createElement("div", {
+              className: "mt-3 h-px w-16 bg-neutral-300/80",
+              "aria-hidden": "true",
+            })
+          )
+        );
+      };
+
+      // Main TeamGridSection component
+      const TeamGridSection = () => {
+        return React.createElement(
+          "section",
+          {
+            className: "py-16 md:py-20",
+            "aria-labelledby": "team-heading",
+          },
+          React.createElement(
+            "div",
+            {
+              className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+            },
+            React.createElement(
+              "header",
+              {
+                className: "text-center mb-12 md:mb-16",
+              },
+              React.createElement(
+                "h2",
+                {
+                  id: "team-heading",
+                  className:
+                    "text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4",
+                },
+                "Meet the Team"
+              ),
+              React.createElement(
+                "p",
+                {
+                  className:
+                    "text-base md:text-lg text-neutral-600 max-w-2xl mx-auto",
+                },
+                "Get to know the creative minds behind Zuboc"
+              )
+            ),
+            React.createElement(
+              "div",
+              {
+                className:
+                  "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8",
+              },
+              teamData.map((member, index) =>
+                React.createElement(ProfileCard, {
+                  key: `${member.name}-${index}`,
+                  member: member,
+                })
+              )
+            )
+          )
+        );
+      };
+
+      // Mount the component
+      const rootElement = document.getElementById("team-grid-root");
+      if (rootElement) {
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(React.createElement(TeamGridSection));
+      }
+    </script>
   </body>
 </html>
