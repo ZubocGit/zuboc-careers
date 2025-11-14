@@ -143,7 +143,7 @@ if (newsletterForm) {
       let response;
       try {
         response = await fetch(
-          "https://n8n.srv1052463.hstgr.cloud/webhook/email_collecting",
+          "https://n8n.srv1052463.hstgr.cloud/webhook-test/email_collecting",
           {
             method: "POST",
             headers: {
@@ -650,7 +650,7 @@ window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
 
-// Keyboard navigation for carousel
+// Keyboard navigation f or carousel
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") {
     document.querySelector(".prev-btn")?.click();
