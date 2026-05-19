@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -707,16 +707,16 @@
           role: "HR & Operations Manager",
           img: "./assets/Team/Sajil.webp",
         },
-        // {
-        //   name: "Hida",
-        //   role: "Admin",
-        //   img: "./assets/Team/Hidha.webp",
-        // },
-        // {
-        //   name: "Nihal",
-        //   role: "Sr. Operations Executive",
-        //   img: "./assets/Team/Nihal2.webp",
-        // },
+        {
+          name: "Hida",
+          role: "Admin",
+          img: "./assets/Team/Hidha.webp",
+        },
+        {
+          name: "Adhi",
+          role: " CRE",
+          img: "./assets/Team/Adhi4.webp",
+        },
         {
           name: "Akhila",
           role: "Inventory Executive",
@@ -729,16 +729,12 @@
           img: "./assets/Team/Anees2.webp",
         },
 
-        {
-          name: "RASHI",
-          role: "Web Developer",
-          img: "./assets/Team/Rashi.webp",
-        },
-        {
-          name: "Adhi",
-          role: " CRE",
-          img: "./assets/Team/Adhi4.webp",
-        },
+        // {
+        //   name: "RASHI",
+        //   role: "Web Developer",
+        //   img: "./assets/Team/Rashi.webp",
+        // },
+
         {
           name: "Rifa",
           role: "Operation Executive",
@@ -750,26 +746,19 @@
           img: "./assets/Team/Fidha.webp",
         },
         {
-          name: "Ramsila",
-          role: "Creative Specialist",
-          img: "./assets/Team/Ramsila2.webp",
+          name: "Mohammed Shibili",
+          role: "Graphics Designer",
+          img: "./assets/Team/shibili.webp",
         },
         {
-          name: "Fathima M",
-          role: "Creative Specialist",
-          img: "./assets/Team/Fathima2.webp",
+          name: "Saalique KP",
+          role: "Photography & Videography",
+          img: "./assets/Team/Saalique.jpeg",
         },
-
         {
-          name: "Nikhil",
-          role: "AI Generalist",
-          img: "./assets/Team/Nikhil';.webp",
-        },
-
-        {
-          name: "Sinan",
-          role: "Video Editor",
-          img: "./assets/Team/Sinan2.webp",
+          name: "Shinas",
+          role: "Photography & Videography",
+          img: "./assets/Team/Shinas.webp",
         },
       ];
 
@@ -783,7 +772,7 @@
         // Check for prefers-reduced-motion
         useEffect(() => {
           const mediaQuery = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
+            "(prefers-reduced-motion: reduce)",
           );
           setReducedMotion(mediaQuery.matches);
 
@@ -868,7 +857,7 @@
                 "absolute inset-0 bg-neutral-900 transition-opacity duration-300",
               style: { opacity: isHovered ? 0.1 : 0.2 },
               "aria-hidden": "true",
-            })
+            }),
           ),
           React.createElement(
             "div",
@@ -882,20 +871,20 @@
                 className:
                   "text-lg md:text-xl font-semibold tracking-[0.12em] uppercase text-neutral-900",
               },
-              member.name
+              member.name,
             ),
             React.createElement(
               "p",
               {
                 className: "mt-1 text-sm text-neutral-600",
               },
-              member.role
+              member.role,
             ),
             React.createElement("div", {
               className: "mt-3 h-px w-16 bg-neutral-300/80",
               "aria-hidden": "true",
-            })
-          )
+            }),
+          ),
         );
       };
 
@@ -924,7 +913,7 @@
                   className:
                     "text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4",
                 },
-                "Meet the Team"
+                "Meet the Team",
               ),
               React.createElement(
                 "p",
@@ -932,8 +921,8 @@
                   className:
                     "text-base md:text-lg text-neutral-600 max-w-2xl mx-auto",
                 },
-                "Get to know the creative minds behind Zuboc"
-              )
+                "Get to know the creative minds behind Zuboc",
+              ),
             ),
             React.createElement(
               "div",
@@ -945,10 +934,10 @@
                 React.createElement(ProfileCard, {
                   key: `${member.name}-${index}`,
                   member: member,
-                })
-              )
-            )
-          )
+                }),
+              ),
+            ),
+          ),
         );
       };
 

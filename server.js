@@ -112,8 +112,10 @@ app.post('/newsletter-subscription', (req, res) => {
   webhookReq.end();
 });
 
-app.get('/', (_req, res) => {
-  res.send('Zuboc local test server is running');
+app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
