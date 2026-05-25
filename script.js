@@ -234,10 +234,10 @@ const jobPositions = {
     type: "Full-time",
     location: "Malappuram, Kerala (On-site)",
   },
-  "creative-head": {
-    id: "creative-head",
-    title: "Creative Head",
-    department: "Creative",
+  "curator": {
+    id: "curator",
+    title: "Curator",
+    department: "Curator",
     type: "Full-time",
     location: "Malappuram, Kerala (On-site)",
   },
